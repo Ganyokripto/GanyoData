@@ -9,97 +9,82 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-:root {
-    --primary: #28a745;
-    --accent: #ffc107;
-    --bg: #0f172a;
-    --card: #ffffff;
+:root{
+--primary:#28a745;
+--bg:#0f172a;
+--card:#ffffff;
 }
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: var(--bg);
-    color: white;
+body{
+margin:0;
+font-family:Arial;
+background:var(--bg);
+color:white;
 }
 
-header {
-    background: white;
-    color: black;
-    padding: 1rem 5%;
-    display: flex;
-    justify-content: space-between;
+header{
+background:white;
+color:black;
+padding:1rem;
+display:flex;
+justify-content:space-between;
 }
 
-.logo {
-    font-weight: bold;
-    color: var(--primary);
+.logo{color:var(--primary);font-weight:bold;}
+
+.section{padding:2rem;}
+
+.card{
+background:var(--card);
+color:black;
+padding:1rem;
+border-radius:10px;
+margin-bottom:15px;
 }
 
-.hero {
-    text-align: center;
-    padding: 3rem 1rem;
+.btn{
+background:var(--primary);
+color:white;
+padding:10px;
+border:none;
+border-radius:8px;
+cursor:pointer;
 }
 
-.hero h1 {
-    font-size: 2.3rem;
+.center{text-align:center;}
+
+#bottomNav{
+position:fixed;
+bottom:0;
+width:100%;
+background:#fff;
+display:flex;
+justify-content:space-around;
+padding:10px 0;
 }
 
-.cta {
-    margin-top: 20px;
+#bottomNav button{
+background:none;
+border:none;
+font-weight:bold;
 }
 
-.btn {
-    background: var(--primary);
-    color: white;
-    padding: 12px 22px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
+.whatsapp{
+position:fixed;
+right:15px;
+bottom:70px;
+background:white;
+color:green;
+padding:15px;
+border-radius:50%;
 }
 
-.timer-box {
-    text-align: center;
-    padding: 1rem;
-    border: 2px solid var(--accent);
-    margin: 20px;
-    border-radius: 10px;
-}
-
-.services {
-    display: grid;
-    gap: 20px;
-    padding: 2rem;
-}
-
-.card {
-    background: var(--card);
-    color: black;
-    padding: 1.5rem;
-    border-radius: 10px;
-    text-align: center;
-}
-
-.game-section {
-    padding: 2rem;
-}
-
-.game-box {
-    background: #111;
-    padding: 1rem;
-    border-radius: 10px;
-    margin-bottom: 15px;
-    text-align: center;
-}
-
-.whatsapp {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: white;
-    color: green;
-    padding: 15px;
-    border-radius: 50%;
+.game-box{
+background:#111;
+padding:1rem;
+border-radius:10px;
+margin-bottom:15px;
+text-align:center;
 }
 
 </style>
@@ -112,41 +97,38 @@ header {
 <div>Powered by GanyoKripto</div>
 </header>
 
-<section class="hero">
-<h1>Your Digital Platform</h1>
-<p>Data • Connectivity • Crypto • Learning</p>
+<!-- HOME -->
+<section class="section center" id="home">
+<h2>Your Digital Platform</h2>
+<p>Data • Crypto • Learning • Opportunities</p>
 
-<div class="cta">
-<a href="https://docs.google.com/forms/d/e/1FAIpQLSerY-T57z-LzSI2yCQ2Z-NbHC1E6oe5tdWG2DQzeYxyPtRg1A/viewform">
-<button class="btn">Order Data Now</button>
-</a>
-</div>
+<button class="btn" onclick="openOrder()">Order Data</button>
 </section>
 
-<div class="timer-box">
+<!-- COUNTDOWN -->
+<section class="section center">
 <h3>🚀 V-BOOST Launch</h3>
-<div id="timer">00:00:00</div>
-</div>
+<div id="timer">--</div>
+</section>
 
-<section class="services">
+<!-- SERVICES -->
+<section class="section" id="services">
 
 <div class="card">
 <h3>⚡ Data Bundles</h3>
-<p>Fast and affordable delivery.</p>
-<button class="btn" onclick="window.location.href='https://docs.google.com/forms/d/e/1FAIpQLSerY-T57z-LzSI2yCQ2Z-NbHC1E6oe5tdWG2DQzeYxyPtRg1A/viewform'">Order</button>
+<p>Fast delivery. Reliable service.</p>
+<button class="btn" onclick="openOrder()">Order Now</button>
 </div>
 
 <div class="card">
 <h3>📊 DeFi Portal</h3>
-<p>Explore digital earning systems.</p>
 <a href="https://app.tactics-strategy.com/r/C7lrUMxqZF" target="_blank">
 <button class="btn">Enter</button>
 </a>
 </div>
 
 <div class="card">
-<h3>🎓 Blockchain Academy</h3>
-<p>Learn crypto step by step.</p>
+<h3>🎓 Academy</h3>
 <a href="https://v-academy.top" target="_blank">
 <button class="btn">Access</button>
 </a>
@@ -154,7 +136,6 @@ header {
 
 <div class="card">
 <h3>👥 Community</h3>
-<p>Join our WhatsApp network.</p>
 <a href="https://chat.whatsapp.com/Dmko91cY4OA93VfBfweaVf" target="_blank">
 <button class="btn">Join</button>
 </a>
@@ -162,12 +143,12 @@ header {
 
 </section>
 
-<section class="game-section">
-
-<h2>🧠 Crypto Game Zone</h2>
+<!-- GAMES -->
+<section class="section" id="games">
+<h3>🧠 Game Zone</h3>
 
 <div class="game-box">
-<h3>Scramble</h3>
+<h4>Scramble</h4>
 <div id="word"></div>
 <input id="input">
 <button onclick="check()">Check</button>
@@ -175,61 +156,111 @@ header {
 </div>
 
 <div class="game-box">
-<h3>Tap Reveal</h3>
+<h4>Flashcard</h4>
 <div id="card" onclick="flip()">HODL</div>
+</div>
+
+<div class="game-box">
+<h4>Quiz</h4>
+<p id="q"></p>
+<button onclick="ans(0)" id="a"></button>
+<button onclick="ans(1)" id="b"></button>
+<button onclick="ans(2)" id="c"></button>
+<p id="qr"></p>
 </div>
 
 </section>
 
+<!-- DASHBOARD -->
+<section class="section" id="dashboard">
+<h3>📊 Admin Dashboard</h3>
+
+<div class="card">
+<p>Total Orders: <span id="orders">0</span></p>
+<p>Pending: <span id="pending">0</span></p>
+<p>Completed: <span id="done">0</span></p>
+</div>
+
+</section>
+
+<!-- WHATSAPP -->
 <a href="https://chat.whatsapp.com/Dmko91cY4OA93VfBfweaVf" class="whatsapp" target="_blank">
 <i class="fab fa-whatsapp"></i>
 </a>
 
+<!-- NAV -->
+<div id="bottomNav">
+<button onclick="go('home')">Home</button>
+<button onclick="go('services')">Services</button>
+<button onclick="go('games')">Games</button>
+<button onclick="go('dashboard')">Dashboard</button>
+</div>
+
 <script>
 
+// NAV
+function go(id){
+document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
+
+// ORDER
+function openOrder(){
+window.location.href="https://docs.google.com/forms/d/e/1FAIpQLSerY-T57z-LzSI2yCQ2Z-NbHC1E6oe5tdWG2DQzeYxyPtRg1A/viewform";
+}
+
 // TIMER
-const target = new Date("May 20, 2026").getTime();
-
+const target=new Date("May 20, 2026").getTime();
 setInterval(()=>{
-let now = new Date().getTime();
-let diff = target - now;
-
+let now=new Date().getTime();
+let diff=target-now;
 if(diff<0){document.getElementById("timer").innerHTML="LIVE";return;}
-
-let h = Math.floor(diff/3600000);
-let m = Math.floor((diff%3600000)/60000);
-let s = Math.floor((diff%60000)/1000);
-
-document.getElementById("timer").innerHTML = h+":"+m+":"+s;
+let h=Math.floor(diff/3600000);
+let m=Math.floor((diff%3600000)/60000);
+let s=Math.floor((diff%60000)/1000);
+document.getElementById("timer").innerHTML=h+":"+m+":"+s;
 },1000);
 
 // SCRAMBLE
-let words=["BTC","NFT","ETH","BLOCK"];
+let words=["BTC","NFT","ETH","BLOCKCHAIN"];
 let current="";
-
 function newWord(){
 current=words[Math.floor(Math.random()*words.length)];
 document.getElementById("word").innerHTML=current.split('').sort(()=>0.5-Math.random()).join('');
 }
-
 function check(){
 if(document.getElementById("input").value.toUpperCase()==current){
 document.getElementById("res").innerHTML="Correct";
 newWord();
-}else{
-document.getElementById("res").innerHTML="Try again";
+}else{document.getElementById("res").innerHTML="Try again";}
 }
-}
-
 newWord();
 
 // FLASHCARD
 let show=false;
 function flip(){
 let c=document.getElementById("card");
-c.innerHTML = show ? "HODL" : "Hold long term";
+c.innerHTML=show?"HODL":"Hold crypto long term";
 show=!show;
 }
+
+// QUIZ
+let quiz=[
+{q:"BTC is?",a:["Coin","Crypto","Bank"],c:1},
+{q:"NFT means?",a:["Token","Non Fungible Token","Cash"],c:1}
+];
+let qi=0;
+function loadQ(){
+document.getElementById("q").innerHTML=quiz[qi].q;
+document.getElementById("a").innerHTML=quiz[qi].a[0];
+document.getElementById("b").innerHTML=quiz[qi].a[1];
+document.getElementById("c").innerHTML=quiz[qi].a[2];
+}
+function ans(i){
+document.getElementById("qr").innerHTML=i==quiz[qi].c?"Correct":"Wrong";
+qi=(qi+1)%quiz.length;
+loadQ();
+}
+loadQ();
 
 </script>
 
