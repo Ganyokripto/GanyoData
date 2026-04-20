@@ -1,266 +1,368 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ganyo Digital | Powered by GanyoKripto</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #28a745;
+            --bg: #0f172a;
+            --card: #ffffff;
+            --text-dark: #1e293b;
+        }
 
-<title>Ganyo Digital | Powered by GanyoKripto</title>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: white;
+            padding-bottom: 80px; /* Space for bottom nav */
+            scroll-behavior: smooth;
+        }
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        header {
+            background: white;
+            color: black;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-<style>
-:root{
---primary:#28a745;
---bg:#0f172a;
---card:#ffffff;
-}
+        .logo { color: var(--primary); font-weight: bold; font-size: 1.2rem; }
 
-body{
-margin:0;
-font-family:Arial;
-background:var(--bg);
-color:white;
-}
+        .section { padding: 2rem 5%; }
+        .center { text-align: center; }
 
-header{
-background:white;
-color:black;
-padding:1rem;
-display:flex;
-justify-content:space-between;
-}
+        .card {
+            background: var(--card);
+            color: var(--text-dark);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
 
-.logo{color:var(--primary);font-weight:bold;}
+        .btn {
+            background: var(--primary);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.3s;
+        }
 
-.section{padding:2rem;}
+        .btn:hover { opacity: 0.9; transform: scale(1.05); }
 
-.card{
-background:var(--card);
-color:black;
-padding:1rem;
-border-radius:10px;
-margin-bottom:15px;
-}
+        #timer {
+            font-size: 2rem;
+            font-weight: bold;
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 10px;
+            border: 1px solid var(--primary);
+            font-family: monospace;
+        }
 
-.btn{
-background:var(--primary);
-color:white;
-padding:10px;
-border:none;
-border-radius:8px;
-cursor:pointer;
-}
+        /* GAMES */
+        .game-box {
+            background: #1e293b;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 1px solid #334155;
+        }
 
-.center{text-align:center;}
+        .game-box input {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            margin-bottom: 10px;
+            width: 80%;
+            text-align: center;
+        }
 
-#bottomNav{
-position:fixed;
-bottom:0;
-width:100%;
-background:#fff;
-display:flex;
-justify-content:space-around;
-padding:10px 0;
-}
+        #word { font-size: 1.8rem; letter-spacing: 5px; color: var(--primary); font-weight: bold; margin: 10px 0; }
+        
+        #card {
+            background: var(--primary);
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            padding: 10px;
+        }
 
-#bottomNav button{
-background:none;
-border:none;
-font-weight:bold;
-}
+        .quiz-option {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            background: #334155;
+            color: white;
+            border: 1px solid #475569;
+        }
 
-.whatsapp{
-position:fixed;
-right:15px;
-bottom:70px;
-background:white;
-color:green;
-padding:15px;
-border-radius:50%;
-}
+        /* NAV */
+        #bottomNav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: #fff;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
 
-.game-box{
-background:#111;
-padding:1rem;
-border-radius:10px;
-margin-bottom:15px;
-text-align:center;
-}
+        #bottomNav button {
+            background: none;
+            border: none;
+            color: #64748b;
+            font-size: 0.8rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+        }
 
-</style>
+        #bottomNav button i { font-size: 1.2rem; margin-bottom: 4px; }
+        #bottomNav button.active { color: var(--primary); }
+
+        .whatsapp {
+            position: fixed;
+            right: 20px;
+            bottom: 85px;
+            background: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            text-decoration: none;
+            z-index: 999;
+        }
+    </style>
 </head>
 
 <body>
 
 <header>
-<div class="logo">Ganyo Digital</div>
-<div>Powered by GanyoKripto</div>
+    <div class="logo">Ganyo Digital</div>
+    <div style="font-size: 0.8rem; font-weight: bold;">Knowledge is Money</div>
 </header>
 
-<!-- HOME -->
 <section class="section center" id="home">
-<h2>Your Digital Platform</h2>
-<p>Data • Crypto • Learning • Opportunities</p>
-
-<button class="btn" onclick="openOrder()">Order Data</button>
+    <h1>Welcome, Entrepreneur</h1>
+    <p>Empowering your digital wealth journey.</p>
+    <button class="btn" onclick="openOrder()"><i class="fas fa-bolt"></i> Buy Data Now</button>
+    <div style="margin-top: 2rem;">
+        <h3 style="color:var(--primary)">🚀 V-BOOST COUNTDOWN</h3>
+        <div id="timer">00:00:00</div>
+    </div>
 </section>
 
-<!-- COUNTDOWN -->
-<section class="section center">
-<h3>🚀 V-BOOST Launch</h3>
-<div id="timer">--</div>
-</section>
-
-<!-- SERVICES -->
 <section class="section" id="services">
+    <h3 class="center">Core Services</h3>
 
-<div class="card">
-<h3>⚡ Data Bundles</h3>
-<p>Fast delivery. Reliable service.</p>
-<button class="btn" onclick="openOrder()">Order Now</button>
-</div>
+    <div class="card">
+        <h3>⚡ Cheap Data Bundles</h3>
+        <p>MTN, Telecel, and AirtelTigo at discount rates.</p>
+        <button class="btn" onclick="openOrder()">Order via Google Form</button>
+    </div>
 
-<div class="card">
-<h3>📊 DeFi Portal</h3>
-<a href="https://app.tactics-strategy.com/r/C7lrUMxqZF" target="_blank">
-<button class="btn">Enter</button>
-</a>
-</div>
+    <div class="card">
+        <h3>📊 Tactics DeFi Portal</h3>
+        <p>Manage your digital assets and strategies.</p>
+        <a href="https://app.tactics-strategy.com/r/C7lrUMxqZF" target="_blank" class="btn">Launch App</a>
+    </div>
 
-<div class="card">
-<h3>🎓 Academy</h3>
-<a href="https://v-academy.top" target="_blank">
-<button class="btn">Access</button>
-</a>
-</div>
+    <div class="card">
+        <h3>🎓 Ganyo Academy</h3>
+        <p>Learn Crypto, NFTs, and Blockchain.</p>
+        <a href="https://v-academy.top" target="_blank" class="btn">Login to Academy</a>
+    </div>
 
-<div class="card">
-<h3>👥 Community</h3>
-<a href="https://chat.whatsapp.com/Dmko91cY4OA93VfBfweaVf" target="_blank">
-<button class="btn">Join</button>
-</a>
-</div>
-
+    <div class="card">
+        <h3>👥 WhatsApp Community</h3>
+        <p>Network with thousands of members.</p>
+        <a href="https://chat.whatsapp.com/Dmko91cY4OA93VfBfweaVf" target="_blank" class="btn">Join Group</a>
+    </div>
 </section>
 
-<!-- GAMES -->
 <section class="section" id="games">
-<h3>🧠 Game Zone</h3>
+    <h3 class="center">🧠 Education Games</h3>
 
-<div class="game-box">
-<h4>Scramble</h4>
-<div id="word"></div>
-<input id="input">
-<button onclick="check()">Check</button>
-<p id="res"></p>
-</div>
+    <!-- SCRAMBLE -->
+    <div class="game-box">
+        <h4>Word Scramble</h4>
+        <div id="word">----</div>
+        <input id="input" placeholder="Unscramble the word">
+        <br>
+        <button class="btn" onclick="checkScramble()">Check Answer</button>
+        <p id="res"></p>
+    </div>
 
-<div class="game-box">
-<h4>Flashcard</h4>
-<div id="card" onclick="flip()">HODL</div>
-</div>
+    <!-- FLASHCARD -->
+    <div class="game-box">
+        <h4>Crypto Flashcards</h4>
+        <p>Tap to reveal meaning:</p>
+        <div id="card" onclick="flipCard()">HODL</div>
+        <br>
+        <button class="btn" style="background:#64748b" onclick="nextCard()">Next Card</button>
+    </div>
 
-<div class="game-box">
-<h4>Quiz</h4>
-<p id="q"></p>
-<button onclick="ans(0)" id="a"></button>
-<button onclick="ans(1)" id="b"></button>
-<button onclick="ans(2)" id="c"></button>
-<p id="qr"></p>
-</div>
-
+    <!-- QUIZ -->
+    <div class="game-box">
+        <h4>Quick Quiz</h4>
+        <p id="q" style="font-weight:bold;"></p>
+        <button class="btn quiz-option" onclick="ans(0)" id="a"></button>
+        <button class="btn quiz-option" onclick="ans(1)" id="b"></button>
+        <button class="btn quiz-option" onclick="ans(2)" id="c"></button>
+        <p id="qr"></p>
+    </div>
 </section>
 
-<!-- DASHBOARD -->
 <section class="section" id="dashboard">
-<h3>📊 Admin Dashboard</h3>
-
-<div class="card">
-<p>Total Orders: <span id="orders">0</span></p>
-<p>Pending: <span id="pending">0</span></p>
-<p>Completed: <span id="done">0</span></p>
-</div>
-
+    <h3 class="center">📊 Market Dashboard</h3>
+    <div class="card">
+        <p><strong>Status:</strong> System Online ✅</p>
+        <p><strong>V-Boost Status:</strong> Initializing...</p>
+        <p><strong>Today's Tip:</strong> Never share your seed phrase!</p>
+    </div>
 </section>
 
-<!-- WHATSAPP -->
 <a href="https://chat.whatsapp.com/Dmko91cY4OA93VfBfweaVf" class="whatsapp" target="_blank">
-<i class="fab fa-whatsapp"></i>
+    <i class="fab fa-whatsapp"></i>
 </a>
 
-<!-- NAV -->
 <div id="bottomNav">
-<button onclick="go('home')">Home</button>
-<button onclick="go('services')">Services</button>
-<button onclick="go('games')">Games</button>
-<button onclick="go('dashboard')">Dashboard</button>
+    <button onclick="go('home')"><i class="fas fa-home"></i>Home</button>
+    <button onclick="go('services')"><i class="fas fa-th-large"></i>Services</button>
+    <button onclick="go('games')"><i class="fas fa-gamepad"></i>Games</button>
+    <button onclick="go('dashboard')"><i class="fas fa-chart-bar"></i>Status</button>
 </div>
 
 <script>
-
-// NAV
+// NAVIGATION
 function go(id){
-document.getElementById(id).scrollIntoView({behavior:"smooth"});
+    document.getElementById(id).scrollIntoView({behavior:"smooth"});
 }
 
-// ORDER
+// ORDER LINK
 function openOrder(){
-window.location.href="https://docs.google.com/forms/d/e/1FAIpQLSerY-T57z-LzSI2yCQ2Z-NbHC1E6oe5tdWG2DQzeYxyPtRg1A/viewform";
+    window.location.href="https://docs.google.com/forms/d/e/1FAIpQLSerY-T57z-LzSI2yCQ2Z-NbHC1E6oe5tdWG2DQzeYxyPtRg1A/viewform";
 }
 
-// TIMER
-const target=new Date("May 20, 2026").getTime();
+// TIMER (Target: May 20, 2026)
+const target = new Date("May 20, 2026 00:00:00").getTime();
 setInterval(()=>{
-let now=new Date().getTime();
-let diff=target-now;
-if(diff<0){document.getElementById("timer").innerHTML="LIVE";return;}
-let h=Math.floor(diff/3600000);
-let m=Math.floor((diff%3600000)/60000);
-let s=Math.floor((diff%60000)/1000);
-document.getElementById("timer").innerHTML=h+":"+m+":"+s;
-},1000);
+    let now = new Date().getTime();
+    let diff = target - now;
+    if(diff < 0){
+        document.getElementById("timer").innerHTML = "V-BOOST IS LIVE!";
+        return;
+    }
+    let d = Math.floor(diff / (1000 * 60 * 60 * 24));
+    let h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    let s = Math.floor((diff % (1000 * 60)) / 1000);
+    document.getElementById("timer").innerHTML = d + "d " + h + "h " + m + "m " + s + "s";
+}, 1000);
 
-// SCRAMBLE
-let words=["BTC","NFT","ETH","BLOCKCHAIN"];
-let current="";
-function newWord(){
-current=words[Math.floor(Math.random()*words.length)];
-document.getElementById("word").innerHTML=current.split('').sort(()=>0.5-Math.random()).join('');
+// SCRAMBLE GAME
+let scrambleWords = ["METAMASK", "BITCOIN", "ETHEREUM", "BLOCKCHAIN", "STAKING", "AIRDROP"];
+let currentScramble = "";
+function newScramble(){
+    currentScramble = scrambleWords[Math.floor(Math.random() * scrambleWords.length)];
+    let scrambled = currentScramble.split('').sort(() => 0.5 - Math.random()).join('');
+    document.getElementById("word").innerHTML = scrambled;
+    document.getElementById("input").value = "";
+    document.getElementById("res").innerHTML = "";
 }
-function check(){
-if(document.getElementById("input").value.toUpperCase()==current){
-document.getElementById("res").innerHTML="Correct";
-newWord();
-}else{document.getElementById("res").innerHTML="Try again";}
+function checkScramble(){
+    let userVal = document.getElementById("input").value.toUpperCase();
+    if(userVal == currentScramble){
+        document.getElementById("res").innerHTML = "✅ Correct! Well done.";
+        document.getElementById("res").style.color = "#28a745";
+        setTimeout(newScramble, 2000);
+    } else {
+        document.getElementById("res").innerHTML = "❌ Try again!";
+        document.getElementById("res").style.color = "#ef4444";
+    }
 }
-newWord();
+newScramble();
 
 // FLASHCARD
-let show=false;
-function flip(){
-let c=document.getElementById("card");
-c.innerHTML=show?"HODL":"Hold crypto long term";
-show=!show;
+let flashData = [
+    {t: "HODL", m: "Hold On for Dear Life (Don't sell)"},
+    {t: "DAO", m: "Decentralized Autonomous Organization"},
+    {t: "DEX", m: "Decentralized Exchange (like Uniswap)"},
+    {t: "GAS", m: "Transaction fee on Ethereum network"}
+];
+let fi = 0;
+let isFlipped = false;
+function flipCard(){
+    let c = document.getElementById("card");
+    c.innerHTML = isFlipped ? flashData[fi].t : flashData[fi].m;
+    c.style.background = isFlipped ? "#28a745" : "#ffc107";
+    c.style.color = isFlipped ? "#fff" : "#000";
+    isFlipped = !isFlipped;
+}
+function nextCard(){
+    fi = (fi + 1) % flashData.length;
+    isFlipped = false;
+    document.getElementById("card").innerHTML = flashData[fi].t;
+    document.getElementById("card").style.background = "#28a745";
 }
 
 // QUIZ
-let quiz=[
-{q:"BTC is?",a:["Coin","Crypto","Bank"],c:1},
-{q:"NFT means?",a:["Token","Non Fungible Token","Cash"],c:1}
+let quizData = [
+    {q: "What is the smallest unit of Bitcoin?", a: ["Satoshi", "Wei", "Gwei"], c: 0},
+    {q: "NFT stands for Non-Fungible...?", a: ["Token", "Trade", "Tool"], c: 0},
+    {q: "Which network uses Gas Fees?", a: ["Internet", "Ethereum", "Bank"], c: 1}
 ];
-let qi=0;
-function loadQ(){
-document.getElementById("q").innerHTML=quiz[qi].q;
-document.getElementById("a").innerHTML=quiz[qi].a[0];
-document.getElementById("b").innerHTML=quiz[qi].a[1];
-document.getElementById("c").innerHTML=quiz[qi].a[2];
+let qi = 0;
+function loadQuiz(){
+    document.getElementById("q").innerHTML = quizData[qi].q;
+    document.getElementById("a").innerHTML = quizData[qi].a[0];
+    document.getElementById("b").innerHTML = quizData[qi].a[1];
+    document.getElementById("c").innerHTML = quizData[qi].a[2];
+    document.getElementById("qr").innerHTML = "";
 }
-function ans(i){
-document.getElementById("qr").innerHTML=i==quiz[qi].c?"Correct":"Wrong";
-qi=(qi+1)%quiz.length;
-loadQ();
+function ans(idx){
+    if(idx == quizData[qi].c){
+        document.getElementById("qr").innerHTML = "✅ Correct!";
+        document.getElementById("qr").style.color = "#28a745";
+        setTimeout(() => {
+            qi = (qi + 1) % quizData.length;
+            loadQuiz();
+        }, 1500);
+    } else {
+        document.getElementById("qr").innerHTML = "❌ Wrong! Try again.";
+        document.getElementById("qr").style.color = "#ef4444";
+    }
 }
-loadQ();
+loadQuiz();
 
 </script>
 
