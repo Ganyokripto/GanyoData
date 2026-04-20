@@ -37,6 +37,9 @@
         .check-btn { background: var(--primary); color: white; border: none; padding: 12px 20px; border-radius: 10px; cursor: pointer; font-weight: bold; }
         .next-btn { background: #6c757d; color: white; border: none; padding: 12px 20px; border-radius: 10px; cursor: pointer; font-weight: bold; }
 
+        /* FLASHCARD STYLE */
+        .flashcard { background: var(--primary); color: white; padding: 30px; border-radius: 15px; margin: 20px auto; cursor: pointer; transition: 0.3s; width: 80%; max-width: 300px; min-height: 80px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+
         .services { padding: 2rem 5%; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
         .card { background: var(--card-bg); padding: 2.5rem 1.5rem; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center; transition: 0.3s; color: #333; display: flex; flex-direction: column; }
         .card i { font-size: 3rem; color: var(--primary); margin-bottom: 1.5rem; }
@@ -68,7 +71,7 @@
         <p style="font-size: 0.8rem; color: #eee; margin: 0;">Days : Hours : Mins : Secs</p>
     </div>
 
-    <!-- BRAIN GAMES SECTION -->
+    <!-- GAME 1: SCRAMBLE -->
     <section class="game-container">
         <h2>🧠 Crypto Scramble</h2>
         <p>Unscramble the word to test your knowledge!</p>
@@ -82,6 +85,14 @@
         <p id="feedback" style="margin-top: 10px; font-weight: bold;"></p>
     </section>
 
+    <!-- GAME 2: FLASHCARDS -->
+    <section class="game-container" style="background: #f9f9f9;">
+        <h2>💡 Crypto Terms Flashcards</h2>
+        <p>Tap the card to reveal the meaning!</p>
+        <div class="flashcard" id="flashcard" onclick="flipCard()">HODL</div>
+        <button class="next-btn" onclick="nextCard()">Next Card</button>
+    </section>
+
     <!-- SERVICES -->
     <div class="services" id="order">
         <div class="card">
@@ -91,7 +102,6 @@
             <button class="btn" onclick="showTelcos()">Order Data</button>
         </div>
         
-        <!-- RESTORED TACTICS LINK -->
         <div class="card">
             <i class="fa-solid fa-chart-line"></i>
             <h3>Digital DeFi Portal</h3>
@@ -110,11 +120,11 @@
             <i class="fa-solid fa-users"></i>
             <h3>WhatsApp Community</h3>
             <p>Join thousands of entrepreneurs today.</p>
-            <a href="https://whatsapp.com" target="_blank" class="btn">Join Group</a>
+            <a href="https:/https://chat.whatsapp.com/Dmko91cY4OA93VfBfweaVf" target="_blank" class="btn">Join Group</a>
         </div>
     </div>
 
-    <!-- TELCO MODAL WITH GOOGLE FORM -->
+    <!-- TELCO MODAL -->
     <div id="telcoModal" class="modal">
         <div class="modal-content">
             <h2 style="color:var(--primary); margin-top: 0;">Select Network</h2>
@@ -127,7 +137,7 @@
         </div>
     </div>
 
-    <a href="https://whatsapp.com" class="whatsapp-float" target="_blank">
+    <a href="https://https://chat.whatsapp.com/Dmko91cY4OA93VfBfweaVf" class="whatsapp-float" target="_blank">
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
@@ -137,27 +147,26 @@
         setInterval(() => {
             const now = new Date().getTime();
             const diff = targetDate - now;
-            const d = Math.floor(diff / (86400000));
+            const d = Math.floor(diff / 86400000);
             const h = Math.floor((diff % 86400000) / 3600000);
             const m = Math.floor((diff % 3600000) / 60000);
             const s = Math.floor((diff % 60000) / 1000);
             document.getElementById("timer").innerHTML = `${d}:${h < 10 ? '0'+h : h}:${m < 10 ? '0'+m : m}:${s < 10 ? '0'+s : s}`;
         }, 1000);
 
-        // EXPANDED SCRAMBLE DATA
+        // GAME 1: SCRAMBLE
         const scrambleWords = [
-            { word: "METAMASK", hint: "A popular crypto wallet browser extension" },
+            { word: "METAMASK", hint: "Popular crypto wallet browser extension" },
             { word: "STAKING", hint: "Locking up coins to earn rewards" },
             { word: "AIRDROP", hint: "Free tokens sent to your wallet" },
             { word: "SOLIDITY", hint: "Programming language for Smart Contracts" },
-            { word: "GASFEE", hint: "The cost of making a transaction" },
             { word: "LIQUIDITY", hint: "Pool of funds used for trading" },
             { word: "WHITELIST", hint: "Early access list for NFT mints" },
-            { word: "STABLECOIN", hint: "Crypto pegged to a currency like USD" },
-            { word: "HODL", hint: "Hold on for dear life" },
+            { word: "STABLECOIN", hint: "Crypto pegged to USD value" },
+            { word: "BLOCKCHAIN", hint: "The ledger technology behind Crypto" },
+            { word: "SATOSHI", hint: "The mysterious creator of Bitcoin" },
             { word: "GANYOKRIPTO", hint: "Your #1 knowledge source" }
         ];
-
         let currentWord;
         function initScramble() {
             let obj = scrambleWords[Math.floor(Math.random() * scrambleWords.length)];
@@ -172,11 +181,10 @@
             document.getElementById("userInput").value = "";
             document.getElementById("feedback").innerText = "";
         }
-
         function checkWord() {
             let input = document.getElementById("userInput").value.toLowerCase();
             if(input === currentWord) {
-                document.getElementById("feedback").innerText = "✅ Excellent! Correct.";
+                document.getElementById("feedback").innerText = "✅ Correct!";
                 document.getElementById("feedback").style.color = "green";
             } else {
                 document.getElementById("feedback").innerText = "❌ Try again!";
@@ -184,18 +192,43 @@
             }
         }
 
-        // NAVIGATION
+        // GAME 2: FLASHCARDS
+        const flashcards = [
+            { term: "HODL", meaning: "Hold On for Dear Life" },
+            { term: "DAO", meaning: "Decentralized Autonomous Organization" },
+            { term: "DEX", meaning: "Decentralized Exchange (like Uniswap)" },
+            { term: "FOMO", meaning: "Fear Of Missing Out" },
+            { term: "FUD", meaning: "Fear, Uncertainty, and Doubt" },
+            { term: "NFT", meaning: "Non-Fungible Token" }
+        ];
+        let cardIdx = 0;
+        let showingMeaning = false;
+        function flipCard() {
+            const card = document.getElementById("flashcard");
+            card.innerText = showingMeaning ? flashcards[cardIdx].term : flashcards[cardIdx].meaning;
+            card.style.background = showingMeaning ? "#28a745" : "#ffc107";
+            card.style.color = showingMeaning ? "white" : "#333";
+            showingMeaning = !showingMeaning;
+        }
+        function nextCard() {
+            cardIdx = (cardIdx + 1) % flashcards.length;
+            showingMeaning = false;
+            const card = document.getElementById("flashcard");
+            card.innerText = flashcards[cardIdx].term;
+            card.style.background = "#28a745";
+            card.style.color = "white";
+        }
+
+        // NAV
         function showTelcos() { document.getElementById('telcoModal').style.display = 'flex'; }
         function closeTelcos() { document.getElementById('telcoModal').style.display = 'none'; }
-        function goToForm() { 
-            window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLSerY-T57z-LzSI2yCQ2Z-NbHC1E6oe5tdWG2DQzeYxyPtRg1A/viewform?usp=header"; 
-        }
+        function goToForm() { window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLSerY-T57z-LzSI2yCQ2Z-NbHC1E6oe5tdWG2DQzeYxyPtRg1A/viewform?usp=header"; }
 
         initScramble();
     </script>
 
     <div class="footer">
-        <p>&copy; 2026 GanyoKripto. Leading the Digital Wealth Future.</p>
+        <p>&copy; 2026 GanyoKripto. Knowledge is Money.</p>
         <p>WhatsApp: +233 24 236 6444</p>
     </div>
 </body>
