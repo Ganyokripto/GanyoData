@@ -3,383 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ganyo Digital | Premium Hub</title>
+    <title>Ganyo Digital | Pro Portal</title>
     <link rel="stylesheet" href="https://cloudflare.com">
     <style>
-        :root {
-            --primary: #22c55e;
-            --accent: #eab308;
-            --bg: #020617;
-            --card-bg: #1e293b;
-            --text-main: #f8fafc;
-        }
-
-        body {
-            margin: 0;
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--text-main);
-            padding-bottom: 90px;
-            scroll-behavior: smooth;
-        }
-
-        /* BIG DATA ORDER SECTION */
-        .mega-order {
-            background: linear-gradient(135deg, #166534 0%, #064e3b 100%);
-            padding: 3rem 1.5rem;
-            text-align: center;
-            border-bottom: 4px solid var(--accent);
-        }
-        .mega-order h1 { font-size: 2.2rem; margin: 0; font-weight: 800; text-transform: uppercase; }
-        .mega-btn {
-            background: var(--accent);
-            color: #000;
-            padding: 20px 40px;
-            font-size: 1.4rem;
-            font-weight: 900;
-            border-radius: 50px;
-            border: none;
-            margin-top: 20px;
-            cursor: pointer;
-            box-shadow: 0 10px 20px rgba(234, 179, 8, 0.3);
-            transition: 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* HEADER & NAVIGATION */
-        header {
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(2, 6, 23, 0.8);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        .logo { color: var(--primary); font-weight: 900; font-size: 1.4rem; }
-
-        .container { padding: 1.5rem; }
-
-        /* COUNTDOWN */
-        .timer-strip {
-            background: #111827;
-            padding: 1rem;
-            border-radius: 15px;
-            text-align: center;
-            margin: 1rem 0;
-            border-left: 5px solid var(--primary);
-        }
-        #timer { font-family: monospace; font-size: 1.5rem; color: var(--accent); font-weight: bold; }
-
-        /* GRID LAYOUT FOR SERVICES */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-bottom: 2rem;
-        }
-        .service-tile {
-            background: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 20px;
-            text-align: center;
-            text-decoration: none;
-            color: white;
-            transition: 0.3s;
-            border: 1px solid #334155;
-        }
-        .service-tile i { font-size: 2rem; color: var(--primary); margin-bottom: 10px; display: block; }
-        .service-tile span { font-weight: bold; font-size: 0.9rem; }
+        :root { --primary: #22c55e; --bg: #0f172a; --card: #1e293b; --accent: #fbbf24; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: white; padding-bottom: 80px; scroll-behavior: smooth; }
+        
+        header { background: #fff; color: #0f172a; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .logo { color: var(--primary); font-weight: 800; font-size: 1.4rem; }
+        
+        .section { padding: 2rem 5%; }
+        .hero { background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%); text-align: center; border-bottom: 3px solid var(--primary); }
+        
+        /* FEATURED ORDER BOX */
+        .order-box { background: white; color: #0f172a; padding: 2rem; border-radius: 20px; max-width: 500px; margin: -50px auto 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); border: 4px solid var(--primary); position: relative; z-index: 10; }
+        .order-box h2 { margin: 0 0 10px; color: var(--primary); font-size: 1.8rem; }
+        .order-box select, .order-box input { width: 100%; padding: 12px; margin: 8px 0; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 1rem; box-sizing: border-box; }
+        
+        .btn { background: var(--primary); color: white; padding: 14px 25px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; width: 100%; font-size: 1.1rem; transition: 0.3s; }
+        .btn:hover { filter: brightness(1.1); transform: translateY(-2px); }
 
         /* GAME ZONE */
-        .game-card {
-            background: #0f172a;
-            border: 2px solid #334155;
-            border-radius: 25px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-        .game-card h3 { color: var(--accent); margin-top: 0; }
+        .game-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .game-card { background: var(--card); padding: 1.5rem; border-radius: 15px; border: 1px solid #334155; text-align: center; }
+        .word-display { font-size: 2rem; letter-spacing: 4px; color: var(--accent); font-weight: 800; margin: 15px 0; }
+        .hint-text { font-style: italic; color: #94a3b8; font-size: 0.9rem; margin-bottom: 10px; display: block; }
         
-        #word-display { font-size: 2.5rem; font-weight: 900; letter-spacing: 4px; color: var(--primary); margin: 20px 0; }
-        .game-input {
-            width: 100%;
-            padding: 15px;
-            border-radius: 12px;
-            border: 2px solid #334155;
-            background: #1e293b;
-            color: white;
-            font-size: 1.1rem;
-            text-align: center;
-            margin-bottom: 15px;
-            box-sizing: border-box;
-        }
+        #flashcard { background: var(--primary); min-height: 120px; display: flex; align-items: center; justify-content: center; border-radius: 12px; cursor: pointer; font-weight: bold; padding: 15px; font-size: 1.1rem; margin: 15px 0; }
         
-        .flash-box {
-            background: var(--primary);
-            height: 120px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 20px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            cursor: pointer;
-            padding: 20px;
-            text-align: center;
-        }
+        .quiz-opt { display: block; width: 100%; margin: 8px 0; background: #334155; color: white; border: 1px solid #475569; padding: 10px; border-radius: 8px; cursor: pointer; text-align: left; }
+        .quiz-opt:hover { background: #475569; }
 
-        .option-btn {
-            background: #334155;
-            border: 1px solid #475569;
-            color: white;
-            width: 100%;
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 10px;
-            text-align: left;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .option-btn:hover { background: #475569; }
-
-        /* BOTTOM NAV */
-        #bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: white;
-            display: flex;
-            justify-content: space-around;
-            padding: 15px 0;
-            border-radius: 25px 25px 0 0;
-            box-shadow: 0 -10px 25px rgba(0,0,0,0.5);
-        }
-        #bottom-nav button {
-            background: none;
-            border: none;
-            color: #64748b;
-            font-size: 0.7rem;
-            font-weight: 700;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-        }
-        #bottom-nav button i { font-size: 1.4rem; }
-        #bottom-nav button.active { color: var(--primary); }
-
-        .whatsapp-float {
-            position: fixed;
-            right: 20px;
-            bottom: 100px;
-            background: #25d366;
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            color: white;
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
-            z-index: 999;
-        }
+        #timer { font-size: 1.5rem; color: var(--accent); font-weight: bold; font-family: monospace; }
+        #bottomNav { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; justify-content: space-around; padding: 10px 0; box-shadow: 0 -5px 15px rgba(0,0,0,0.1); z-index: 1000; }
+        #bottomNav button { background: none; border: none; color: #64748b; font-weight: bold; cursor: pointer; font-size: 0.9rem; }
+        #bottomNav button i { display: block; font-size: 1.2rem; margin-bottom: 3px; }
     </style>
 </head>
 <body>
 
-    <div class="mega-order">
-        <h1>GANYO DIGITAL</h1>
-        <p style="color: #cbd5e1;">Lowest Prices. Instant Delivery.</p>
-        <button class="mega-btn" onclick="openOrder()">
-            <i class="fas fa-shopping-cart"></i> ORDER DATA NOW
-        </button>
-    </div>
+<header>
+    <div class="logo">GANYO DIGITAL</div>
+    <div id="timer">00:00:00</div>
+</header>
 
-    <header>
-        <div class="logo">GK HUB</div>
-        <div style="font-size: 0.7rem; font-weight: bold; background: var(--accent); color: black; padding: 4px 10px; border-radius: 5px;">PRO VERSION</div>
-    </header>
+<section class="section hero">
+    <h1>Knowledge is Money</h1>
+    <p>Premium Data Bundles & Crypto Education</p>
+</section>
 
-    <div class="container">
-        <!-- TIMER -->
-        <div class="timer-strip" id="timer-box">
-            <span style="font-size: 0.8rem; opacity: 0.7; display: block;">V-BOOST PROJECT LAUNCHING IN:</span>
-            <div id="timer">--:--:--:--</div>
-        </div>
+<!-- MAIN ORDER FORM -->
+<div class="order-box">
+    <h2>⚡ ORDER DATA</h2>
+    <form id="orderForm">
+        <select name="Network" required id="networkSelect">
+            <option value="">Select Network</option>
+            <option value="MTN">MTN Ghana</option>
+            <option value="Telecel">Telecel (Vodafone)</option>
+            <option value="AirtelTigo">AirtelTigo</option>
+        </select>
+        <input type="text" name="Phone" placeholder="Phone Number" required>
+        <input type="text" name="Amount" placeholder="Data Amount (e.g. 10GB)" required>
+        <button type="submit" class="btn">Submit Order Now</button>
+    </form>
+    <p id="orderStatus" style="text-align:center; font-weight:bold; margin-top:10px;"></p>
+</div>
 
-        <!-- NEW GRID SERVICES -->
-        <div class="services-grid" id="services">
-            <a href="https://tactics-strategy.com" target="_blank" class="service-tile">
-                <i class="fas fa-chart-pie"></i>
-                <span>DeFi Portal</span>
-            </a>
-            <a href="https://v-academy.top" target="_blank" class="service-tile">
-                <i class="fas fa-graduation-cap"></i>
-                <span>Academy</span>
-            </a>
-            <a href="https://whatsapp.com" target="_blank" class="service-tile">
-                <i class="fas fa-users"></i>
-                <span>Community</span>
-            </a>
-            <div class="service-tile" style="opacity: 0.5;">
-                <i class="fas fa-wallet"></i>
-                <span>Wallet (Soon)</span>
-            </div>
-        </div>
-
-        <h2 id="games-title"><i class="fas fa-gamepad" style="color:var(--accent)"></i> BRAIN CHALLENGE</h2>
-
-        <!-- EXPANDED SCRAMBLE -->
-        <div class="game-card" id="games">
-            <h3>Word Scramble</h3>
-            <p style="font-size: 0.8rem; opacity: 0.7;">Unscramble the crypto term:</p>
-            <div id="word-display">----</div>
-            <input type="text" id="scramble-input" class="game-input" placeholder="Type answer here">
-            <button class="mega-btn" style="padding: 12px 30px; font-size: 1rem;" onclick="checkScramble()">Check Word</button>
-            <p id="scramble-msg" style="font-weight: bold; margin-top: 10px;"></p>
-        </div>
-
-        <!-- EXPANDED FLASHCARDS -->
+<section class="section" id="games">
+    <h2 style="text-align:center; color: var(--primary);">🧠 THE LEARNING ZONE</h2>
+    <div class="game-grid">
+        
+        <!-- SCRAMBLE -->
         <div class="game-card">
-            <h3>Crypto Glossary</h3>
-            <p style="font-size: 0.8rem; opacity: 0.7;">Tap to flip the card:</p>
-            <div class="flash-box" id="flash-card" onclick="flipCard()">...</div>
-            <button class="mega-btn" style="background:#475569; padding: 10px 20px; font-size: 0.9rem;" onclick="nextCard()">Next Term</button>
+            <h3>Scramble</h3>
+            <span class="hint-text" id="sHint">Hint: ---</span>
+            <div class="word-display" id="sWord">----</div>
+            <input type="text" id="sInput" placeholder="Answer..." style="width:70%; padding:10px; border-radius:5px;">
+            <button class="btn" style="width:auto; margin-top:10px;" onclick="checkS()">Verify</button>
         </div>
 
-        <!-- DYNAMIC QUIZ -->
+        <!-- FLASHCARDS -->
         <div class="game-card">
-            <h3>Quick Master Quiz</h3>
-            <p id="quiz-question" style="font-weight: bold; margin-bottom: 20px;">Question loading...</p>
-            <div id="quiz-options"></div>
-            <p id="quiz-feedback" style="margin-top: 10px; font-weight: bold;"></p>
+            <h3>Flashcards</h3>
+            <p>Tap to reveal meaning</p>
+            <div id="flashcard" onclick="flipC()">HODL</div>
+            <button class="btn" style="background:#475569;" onclick="nextC()">Next Card</button>
         </div>
 
-        <!-- DASHBOARD / STATUS -->
-        <div class="game-card" id="dashboard" style="border-color: var(--primary);">
-            <h3>System Pulse</h3>
-            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                <span>Data Delivery:</span>
-                <span style="color: var(--primary);">99.9% Online</span>
-            </div>
-            <div style="display: flex; justify-content: space-between;">
-                <span>Network Status:</span>
-                <span style="color: var(--accent);">Ready</span>
-            </div>
+        <!-- QUIZ -->
+        <div class="game-card">
+            <h3>Quiz Mastery</h3>
+            <p id="qText" style="font-weight:bold; min-height:50px;"></p>
+            <div id="qOptions"></div>
+            <p id="qRes" style="margin-top:10px; font-weight:bold;"></p>
         </div>
-    </div>
 
-    <a href="https://whatsapp.com" class="whatsapp-float">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <div id="bottom-nav">
-        <button onclick="go('timer-box')" class="active"><i class="fas fa-home"></i>Home</button>
-        <button onclick="go('services')"><i class="fas fa-rocket"></i>Apps</button>
-        <button onclick="go('games')"><i class="fas fa-brain"></i>Learn</button>
-        <button onclick="go('dashboard')"><i class="fas fa-chart-line"></i>Status</button>
     </div>
+</section>
+
+<div id="bottomNav">
+    <button onclick="window.scrollTo(0,0)"><i class="fas fa-home"></i>Home</button>
+    <button onclick="document.getElementById('games').scrollIntoView()"><i class="fas fa-gamepad"></i>Games</button>
+    <button onclick="window.open('https://v-academy.top')"><i class="fas fa-graduation-cap"></i>Academy</button>
+    <button onclick="window.open('https://whatsapp.com')"><i class="fab fa-whatsapp"></i>Join</button>
+</div>
 
 <script>
-function go(id){ document.getElementById(id).scrollIntoView({behavior:"smooth"}); }
-function openOrder(){ window.location.href="https://google.com"; }
+// --- GOOGLE SHEETS INTEGRATION ---
+const scriptUrl = 'PASTE_YOUR_APPS_SCRIPT_URL_HERE'; 
+document.getElementById('orderForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const status = document.getElementById('orderStatus');
+    status.innerText = "Processing...";
+    fetch(scriptUrl, { method: 'POST', body: new FormData(e.target)})
+        .then(response => {
+            status.innerText = "Order Sent Successfully! ✅";
+            e.target.reset();
+        })
+        .catch(error => {
+            status.innerText = "Error sending order. Please try again.";
+        });
+});
 
-// TIMER
-const target = new Date("May 20, 2026").getTime();
-setInterval(()=>{
-    let now = new Date().getTime();
-    let diff = target - now;
-    let d = Math.floor(diff / 86400000);
-    let h = Math.floor((diff % 86400000) / 3600000);
-    let m = Math.floor((diff % 3600000) / 60000);
-    let s = Math.floor((diff % 60000) / 1000);
-    document.getElementById("timer").innerHTML = `${d}D : ${h}H : ${m}M : ${s}S`;
-},1000);
-
-// GAME DATA (Larger Database)
-const scramblePool = ["SMARTCONTRACT", "DECENTRALIZED", "STAKING", "LIQUIDITY", "PRIVATEKEY", "WHITEPAPER", "METAMASK", "BINANCE", "SATOSHI", "WEBTHREE", "ETHEREUM", "GASFEES"];
-let currentWord = "";
-function initScramble(){
-    currentWord = scramblePool[Math.floor(Math.random()*scramblePool.length)];
-    let s = currentWord.split('').sort(()=>0.5-Math.random()).join('');
-    document.getElementById("word-display").innerHTML = s;
-    document.getElementById("scramble-input").value = "";
-    document.getElementById("scramble-msg").innerHTML = "";
-}
-function checkScramble(){
-    if(document.getElementById("scramble-input").value.toUpperCase() === currentWord){
-        document.getElementById("scramble-msg").innerHTML = "🔥 Correct! Knowledge is Money.";
-        document.getElementById("scramble-msg").style.color = "var(--primary)";
-        setTimeout(initScramble, 2000);
-    } else {
-        document.getElementById("scramble-msg").innerHTML = "❌ Not quite. Try again!";
-        document.getElementById("scramble-msg").style.color = "#ef4444";
-    }
-}
-
-// FLASHCARDS
-const glossary = [
-    {t: "WHALE", m: "Someone holding massive amounts of crypto."},
-    {t: "BULL MARKET", m: "When prices are rising and everyone is happy."},
-    {t: "BEAR MARKET", m: "When prices are falling rapidly."},
-    {t: "COLD STORAGE", m: "Storing crypto offline for maximum safety."},
-    {t: "FIAT", m: "Regular money like Cedis or Dollars."},
-    {t: "FOMO", m: "Fear of missing out on a price pump."}
+// --- SCRAMBLE GAME ---
+const scrambles = [
+    {w: "SATOSHI", h: "The creator of Bitcoin"},
+    {w: "BLOCKCHAIN", h: "A digital ledger of transactions"},
+    {w: "METAMASK", h: "Popular browser-based crypto wallet"},
+    {w: "STAKING", h: "Locking assets to earn network rewards"},
+    {w: "AIRDROP", h: "Free tokens sent to your wallet"},
+    {w: "GASFEE", h: "Transaction cost on the network"},
+    {w: "SOLIDITY", h: "Language for Smart Contracts"},
+    {w: "LIQUIDITY", h: "Pool of funds used for decentralized trading"}
 ];
-let fi = 0; let flipped = false;
-function flipCard(){
-    document.getElementById("flash-card").innerHTML = flipped ? glossary[fi].t : glossary[fi].m;
-    document.getElementById("flash-card").style.background = flipped ? "var(--primary)" : "var(--accent)";
-    document.getElementById("flash-card").style.color = flipped ? "white" : "black";
+let curS;
+function initS(){
+    curS = scrambles[Math.floor(Math.random()*scrambles.length)];
+    document.getElementById("sWord").innerText = curS.w.split('').sort(()=>0.5-Math.random()).join('');
+    document.getElementById("sHint").innerText = "Hint: " + curS.h;
+    document.getElementById("sInput").value = "";
+}
+function checkS(){
+    if(document.getElementById("sInput").value.toUpperCase() === curS.w){
+        alert("Correct!"); initS();
+    } else alert("Try again!");
+}
+
+// --- FLASHCARDS ---
+const cards = [
+    {t: "HODL", m: "Hold On for Dear Life (Don't sell during dips)"},
+    {t: "FOMO", m: "Fear Of Missing Out"},
+    {t: "DAO", m: "Decentralized Autonomous Organization"},
+    {t: "DEX", m: "Decentralized Exchange (No middleman)"},
+    {t: "FUD", m: "Fear, Uncertainty, and Doubt"},
+    {t: "WHALE", m: "Investors with massive amounts of crypto"}
+];
+let curC = 0, flipped = false;
+function flipC(){
+    const f = document.getElementById("flashcard");
+    f.innerText = flipped ? cards[curC].t : cards[curC].m;
+    f.style.background = flipped ? "var(--primary)" : "var(--accent)";
     flipped = !flipped;
 }
-function nextCard(){
-    fi = (fi + 1) % glossary.length; flipped = false;
-    document.getElementById("flash-card").innerHTML = glossary[fi].t;
-    document.getElementById("flash-card").style.background = "var(--primary)";
+function nextC(){
+    curC = (curC + 1) % cards.length; flipped = false;
+    document.getElementById("flashcard").innerText = cards[curC].t;
+    document.getElementById("flashcard").style.background = "var(--primary)";
 }
 
-// QUIZ
+// --- QUIZ ---
 const quizzes = [
-    {q: "Which coin is called 'Digital Gold'?", a: ["Ethereum", "Bitcoin", "Dogecoin"], c: 1},
-    {q: "What is a Seed Phrase?", a: ["A password for your wallet", "A list of 12-24 words for recovery", "A secret garden"], c: 1},
-    {q: "Who created Bitcoin?", a: ["Vitalik Buterin", "Elon Musk", "Satoshi Nakamoto"], c: 2},
-    {q: "What is a Stablecoin?", a: ["A coin that never grows", "A coin pegged to the USD", "A safe coin"], c: 1},
-    {q: "DeFi stands for...?", a: ["Deferred Finance", "Decentralized Finance", "Digital Finance"], c: 1}
+    {q: "What is the max supply of Bitcoin?", o: ["21 Million", "100 Million", "Unlimited"], c: 0},
+    {q: "Which network uses 'Gas'?", o: ["Bitcoin", "Ethereum", "Visa"], c: 1},
+    {q: "What does NFT stand for?", o: ["Next Fast Trade", "Non-Fungible Token", "New Finance Tech"], c: 1},
+    {q: "Which wallet is 'Cold'?", o: ["Hardware Wallet", "Exchange Wallet", "Browser Extension"], c: 0},
+    {q: "Smallest unit of Bitcoin?", o: ["Bit", "Satoshi", "Wei"], c: 1}
 ];
-let qi = 0;
-function loadQuiz(){
-    const q = quizzes[qi];
-    document.getElementById("quiz-question").innerHTML = q.q;
-    let html = "";
-    q.a.forEach((opt, index) => {
-        html += `<button class="option-btn" onclick="checkQuiz(${index})">${opt}</button>`;
-    });
-    document.getElementById("quiz-options").innerHTML = html;
-    document.getElementById("quiz-feedback").innerHTML = "";
+let curQ = 0;
+function initQ(){
+    const q = quizzes[curQ];
+    document.getElementById("qText").innerText = q.q;
+    document.getElementById("qOptions").innerHTML = q.o.map((opt, i) => 
+        `<button class="quiz-opt" onclick="checkQ(${i})">${opt}</button>`).join('');
+    document.getElementById("qRes").innerText = "";
 }
-function checkQuiz(idx){
-    if(idx === quizzes[qi].c){
-        document.getElementById("quiz-feedback").innerHTML = "✅ Perfect Answer!";
-        document.getElementById("quiz-feedback").style.color = "var(--primary)";
-        setTimeout(()=>{ qi = (qi+1)%quizzes.length; loadQuiz(); }, 1500);
+function checkQ(i){
+    const res = document.getElementById("qRes");
+    if(i === quizzes[curQ].c){
+        res.innerText = "Correct! ✅"; res.style.color = "var(--primary)";
+        setTimeout(()=>{ curQ = (curQ+1)%quizzes.length; initQ(); }, 1500);
     } else {
-        document.getElementById("quiz-feedback").innerHTML = "❌ Think about it and try again!";
-        document.getElementById("quiz-feedback").style.color = "#ef4444";
+        res.innerText = "Wrong ❌"; res.style.color = "red";
     }
 }
 
-// START
-initScramble();
-nextCard();
-loadQuiz();
+// --- TIMER ---
+setInterval(()=>{
+    const diff = new Date("May 20, 2026") - new Date();
+    if(diff < 0) { document.getElementById("timer").innerText = "LIVE!"; return; }
+    const h = Math.floor(diff/3600000);
+    const m = Math.floor((diff%3600000)/60000);
+    const s = Math.floor((diff%60000)/1000);
+    document.getElementById("timer").innerText = `${h}:${m}:${s}`;
+},1000);
+
+initS(); initQ();
 </script>
+
 </body>
 </html>
