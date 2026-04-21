@@ -66,10 +66,10 @@
         </div>
         <div class="package-grid" id="pkgGrid"></div>
         <input type="number" id="orderPhone" class="input-phone" placeholder="Recipient Phone Number">
-        <!-- FIXED WHATSAPP LINK BELOW -->
-        <a href="https://wa.link/kbtdui" target="_blank" class="order-btn" onclick="checkOrder(event)">
+        
+        <button class="order-btn" onclick="sendCustomOrder()">
             <i class="fa-brands fa-whatsapp"></i> Order via WhatsApp
-        </a>
+        </button>
     </section>
 
     <!-- CORE SERVICES -->
@@ -115,7 +115,7 @@
     </div>
 
     <script>
-        let activeNet = 'MTN', activePkg = '';
+        let activeNet = 'MTN', activePkg = '', activePrice = '';
         const packages = [
             {v: "1GB", p: "5.5"}, {v: "2GB", p: "10"}, {v: "3GB", p: "15"},
             {v: "4GB", p: "20"}, {v: "5GB", p: "25"}, {v: "6GB", p: "30"},
@@ -124,7 +124,7 @@
 
         function renderPackages() {
             document.getElementById('pkgGrid').innerHTML = packages.map(p => `
-                <div class="pkg-btn" onclick="setPkg('${p.v}', this)">
+                <div class="pkg-btn" onclick="setPkg('${p.v}', '¢${p.p}', this)">
                     <b>${p.v}</b><br>GHC ${p.p}
                 </div>
             `).join('');
@@ -136,19 +136,24 @@
             el.classList.add('active');
         }
 
-        function setPkg(pkg, el) {
+        function setPkg(pkg, price, el) {
             activePkg = pkg;
+            activePrice = price;
             document.querySelectorAll('.pkg-btn').forEach(b => b.classList.remove('active'));
             el.classList.add('active');
         }
 
-        // Simple validation before opening the wa.link
-        function checkOrder(event) {
+        function sendCustomOrder() {
             const phone = document.getElementById('orderPhone').value;
             if (!activePkg || !phone) {
-                event.preventDefault();
-                alert("Please select a Data Package and enter the Phone Number first!");
+                return alert("Please select a Bundle and enter a Phone Number!");
             }
+
+            // The template you requested
+            const message = `🚀 *NEW DATA ORDER*%0A----------------------%0A👤 *Network:* ${activeNet}%0A📱 *Recipient:* ${phone}%0A📦 *Bundle:* ${activePkg} (${activePrice})%0A----------------------`;
+            
+            // Sends to your number 0505332010
+            window.open(`https://wa.me{message}`, '_blank');
         }
 
         const quizData = [
