@@ -114,7 +114,7 @@ header { background:#fff; padding:1rem 5%; display:flex; justify-content:space-b
 </section>
 
 <div class="footer">
-GanyoDigital Powered By: GanyoKripto 2026 | Support: 0505332010
+GanyoKripto & copy; 2026 | Support: 0505332010
 </div>
 
 <script>
@@ -144,40 +144,20 @@ document.querySelectorAll('.pkg-btn').forEach(b=>b.classList.remove('active'));
 el.classList.add('active');
 }
 
-// --- CORRECTED ORDER COUNTER LOGIC ---
+// ORDER COUNTER LOGIC - ONLY INCREASES ON CLICK
+let orderCount = parseInt(localStorage.getItem('ganyoOrders')) || 0; 
+document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
 
-// 1. Load the count using the SAME name used for saving ('GanyoData')
-let orderCount = parseInt(localStorage.getItem('GanyoData')) || 0; 
-
-// 2. Display the number on page load
-const counterElement = document.getElementById('totalOrders');
-if (counterElement) {
-    counterElement.innerText = orderCount.toLocaleString();
-}
-
-// 3. The Order Function
-function sendOrder() {
+function sendOrder(){
     const phone = document.getElementById('orderPhone').value;
+    if(!activePkg || !phone){ alert("Select bundle and enter number"); return; }
     
-    // Validation
-    if (!activePkg || !phone) { 
-        alert("Select bundle and enter number"); 
-        return; 
-    }
-    
-    // --- COUNTER FIX ---
-    orderCount++; // Add 1 to the current count
-    localStorage.setItem('GanyoData', orderCount); // Save it using the consistent name
-    
-    // Update the text on the screen immediately
-    if (counterElement) {
-        counterElement.innerText = orderCount.toLocaleString();
-    }
+    orderCount++;
+    localStorage.setItem('GanyoData', orderCount);
+    document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
 
-    // Build and send the WhatsApp message
-    const msg = `🚀 *NEW DATA ORDER*%0A----------------------%0A👤 *Network:* ${activeNet}%0A📱 *Recipient:* ${phone}%0A📦 *Bundle:* ${activePkg} (${activePrice})%0A----------------------`;
-    window.open("https://wa.me/233505332010?text=" + msg);
-}
+    const msg=`🚀 *NEW DATA ORDER*%0A----------------------%0A👤 *Network:* ${activeNet}%0A📱 *Recipient:* ${phone}%0A📦 *Bundle:* ${activePkg} (${activePrice})%0A----------------------`;
+    window.open("https://wa.me/233505332010?text="+msg);
 }
 
 // TIMER
