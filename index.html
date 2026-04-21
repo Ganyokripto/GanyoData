@@ -4,9 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GanyoKripto | Fast Data & Services</title>
-
-<!-- FIX ICONS -->
-<link rel="stylesheet" href="https://cloudflare.com">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 :root { 
@@ -17,141 +15,44 @@
 --card-bg:#ffffff;
 }
 
-body {
-font-family:'Segoe UI',sans-serif;
-margin:0;
-background:var(--bg);
-color:var(--text);
-}
-
-header {
-background:#fff;
-padding:1rem 5%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
-
+body { font-family:'Segoe UI',sans-serif; margin:0; background:var(--bg); color:var(--text); }
+header { background:#fff; padding:1rem 5%; display:flex; justify-content:space-between; align-items:center; }
 .logo { color:var(--primary); font-weight:bold; font-size:1.4rem; }
-.motto { color:var(--accent); font-weight:bold; }
+.motto { color:var(--accent); font-weight:bold; font-size:0.9rem; }
 
-.order-section {
-background:#fff;
-padding:1.5rem;
-border-radius:20px;
-margin:15px 5%;
-color:#333;
-text-align:center;
-}
-
+/* ORDER SECTION */
+.order-section { background:#fff; padding:1.5rem; border-radius:20px; margin:15px 5%; color:#333; text-align:center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
 .network-grid { display:flex; gap:8px; justify-content:center; }
 .net-btn { padding:8px 15px; border:2px solid #eee; border-radius:8px; cursor:pointer; font-weight:bold; }
-.net-btn.active { background:#e8f5e9; border-color:var(--primary); }
+.net-btn.active { background:#e8f5e9; border-color:var(--primary); color:var(--primary); }
 
-.package-grid {
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:8px;
-margin:15px 0;
-}
+.package-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:15px 0; }
+.pkg-btn { padding:10px; border:1px solid #ddd; border-radius:8px; cursor:pointer; font-size:0.8rem; background:#f9f9f9; }
+.pkg-btn.active { background:var(--primary); color:white; border-color:var(--primary); }
 
-.pkg-btn {
-padding:10px;
-border:1px solid #ddd;
-border-radius:8px;
-cursor:pointer;
-font-size:0.8rem;
-background:#f9f9f9;
-}
-.pkg-btn.active {
-background:var(--primary);
-color:white;
-}
+.input-phone { padding:12px; width:100%; max-width:280px; border-radius:10px; border:1px solid #ccc; margin-bottom:10px; outline:none; text-align:center; }
+.order-btn { background:#25d366; color:white; padding:12px; border-radius:50px; border:none; cursor:pointer; width:100%; max-width:250px; font-weight:bold; font-size:1rem; }
 
-.input-phone {
-padding:12px;
-width:100%;
-max-width:280px;
-border-radius:10px;
-border:1px solid #ccc;
-margin-bottom:10px;
-text-align:center;
-}
+.order-count { font-size: 0.85rem; color: #28a745; margin-top: 10px; font-weight: bold; background: #f0fdf4; padding: 5px 12px; border-radius: 15px; display: inline-block; }
 
-.order-btn {
-background:#25d366;
-color:white;
-padding:12px;
-border-radius:50px;
-border:none;
-cursor:pointer;
-width:100%;
-max-width:250px;
-font-weight:bold;
-font-size:1rem;
-}
+/* SERVICES BUTTONS */
+.services { padding:1rem 5%; display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1rem; }
+.card { background:white; padding:1.5rem; border-radius:15px; text-align:center; color:#333; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+.card h3 { margin-top:0; color:var(--primary); }
+.serv-btn { display:block; background:var(--primary); color:white; text-decoration:none; padding:10px; border-radius:8px; font-weight:bold; transition: 0.3s; margin-top:10px; }
 
-.order-count { font-size: 0.85rem; color: #28a745; margin-top: 10px; font-weight: bold; }
+/* TIMER */
+.vboost-box { margin:15px 5%; padding:1rem; border:2px solid var(--accent); text-align:center; border-radius:15px; background: rgba(0,0,0,0.1); }
+#timer { font-size:1.8rem; font-weight:bold; font-family: monospace; }
 
-.services {
-padding:1rem 5%;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:1rem;
-}
+/* QUIZ */
+.quiz-container { background:#fff; padding:1.5rem; margin:15px 5%; border-radius:15px; color:#333; text-align:center; }
+.option-btn { display:block; width:100%; padding:12px; margin:8px 0; border-radius:8px; border:1px solid #ddd; cursor:pointer; background:#fff; transition:0.2s; font-weight:500; }
+.option-btn:hover { background:#f0f0f0; }
+.score-box { font-weight:bold; margin:15px 0; font-size:1.1rem; color:var(--primary); }
+.next-btn { background:#6c757d; color:white; border:none; padding:10px 20px; border-radius:8px; cursor:pointer; }
 
-.card {
-background:white;
-padding:1rem;
-border-radius:15px;
-text-align:center;
-color:#333;
-}
-
-.card a {
-display:inline-block;
-margin-top:10px;
-color:var(--primary);
-font-weight:bold;
-text-decoration:none;
-border:1px solid var(--primary);
-padding:5px 15px;
-border-radius:5px;
-}
-
-.vboost-box {
-margin:15px 5%;
-padding:1rem;
-border:2px solid var(--accent);
-text-align:center;
-border-radius:15px;
-}
-
-#timer { font-size:1.6rem; font-weight:bold; }
-
-.quiz-container {
-background:#fff;
-padding:1rem;
-margin:15px 5%;
-border-radius:15px;
-color:#333;
-text-align:center;
-}
-
-.option-btn {
-display:block;
-width:100%;
-padding:10px;
-margin:5px 0;
-border-radius:8px;
-border:1px solid #ddd;
-cursor:pointer;
-background:#fff;
-}
-
-.score { font-weight:bold; margin-top:10px; color:var(--primary); }
-
-.footer { text-align:center; padding:20px; font-size:0.9rem; }
+.footer { text-align:center; padding:25px; font-size:0.9rem; }
 </style>
 </head>
 
@@ -162,10 +63,8 @@ background:#fff;
 <div class="motto">Knowledge is Money</div>
 </header>
 
-<!-- ORDER -->
 <section class="order-section">
 <h2>Buy Cheap Data</h2>
-
 <div class="network-grid">
 <div class="net-btn active" onclick="setNet('MTN',this)">MTN</div>
 <div class="net-btn" onclick="setNet('Telecel',this)">Telecel</div>
@@ -175,60 +74,51 @@ background:#fff;
 <div class="package-grid" id="pkgGrid"></div>
 
 <input type="number" id="orderPhone" class="input-phone" placeholder="Recipient Number">
-
 <button class="order-btn" onclick="sendOrder()">Place Order Now</button>
-<div class="order-count">Total Orders: <span id="totalOrders">0</span></div>
+<br>
+<div class="order-count"><i class="fa fa-check-circle"></i> <span id="totalOrders">0</span> Orders Processed</div>
 </section>
 
-<!-- SERVICES -->
 <div class="services">
 <div class="card">
+<i class="fa fa-chart-line" style="font-size:2rem; color:var(--primary)"></i>
 <h3>DeFi Portal</h3>
-<p>Check your strategy</p>
-<a href="https://tactics-strategy.com" target="_blank">Enter</a>
+<a href="https://tactics-strategy.com" target="_blank" class="serv-btn">Enter Portal</a>
 </div>
 
 <div class="card">
+<i class="fa fa-graduation-cap" style="font-size:2rem; color:var(--primary)"></i>
 <h3>Academy</h3>
-<p>Learn Digital Wealth</p>
-<a href="https://v-academy.top" target="_blank">Login</a>
+<a href="https://v-academy.top" target="_blank" class="serv-btn">Login Academy</a>
 </div>
 
 <div class="card">
+<i class="fa fa-users" style="font-size:2rem; color:var(--primary)"></i>
 <h3>Community</h3>
-<p>Join the conversation</p>
-<a href="https://whatsapp.com" target="_blank">Join</a>
+<a href="https://whatsapp.com" target="_blank" class="serv-btn">Join WhatsApp</a>
 </div>
 </div>
 
-<!-- TIMER -->
 <div class="vboost-box">
-<h3>🚀 V-BOOST LAUNCH</h3>
+<h3>🚀 V-BOOST LAUNCH COUNTDOWN</h3>
 <div id="timer">00:00:00:00</div>
 </div>
 
-<!-- QUIZ -->
 <section class="quiz-container">
-<h3>🧠 Crypto Quiz</h3>
-
-<p id="qText" style="font-weight:bold;"></p>
+<h3>🧠 Crypto & DeFi IQ Quiz</h3>
+<p id="qText" style="font-weight:bold; font-size:1.1rem;"></p>
 <div id="qOptions"></div>
 <p id="qRes" style="font-weight:bold; height:20px;"></p>
-
-<div class="score">Score: <span id="score">0</span></div>
-
-<button onclick="nextQ()" style="margin-top:10px; padding:5px 15px; border-radius:5px; border:none; background:#6c757d; color:white; cursor:pointer;">Next Question</button>
+<div class="score-box">Your Score: <span id="score">0</span></div>
+<button class="next-btn" onclick="nextQ()">Next Question</button>
 </section>
 
 <div class="footer">
-Support: 0505332010
+GanyoKripto &copy; 2024 | Support: 0505332010
 </div>
 
 <script>
-
-// PACKAGES
 let activeNet='MTN', activePkg='', activePrice='';
-
 const packages=[
 {v:"1GB",p:"5.5"},{v:"2GB",p:"10"},{v:"3GB",p:"15"},
 {v:"4GB",p:"20"},{v:"5GB",p:"25"},{v:"6GB",p:"30"},
@@ -249,71 +139,47 @@ el.classList.add('active');
 }
 
 function setPkg(pkg,price,el){
-activePkg=pkg;
-activePrice=price;
+activePkg=pkg; activePrice=price;
 document.querySelectorAll('.pkg-btn').forEach(b=>b.classList.remove('active'));
 el.classList.add('active');
 }
 
-// ORDER COUNT LOGIC (ONLY ON TAP)
-let orderCount = parseInt(localStorage.getItem('ganyoOrders')) || 142;
-document.getElementById('totalOrders').innerText = orderCount;
+// ORDER COUNTER LOGIC - ONLY INCREASES ON CLICK
+let orderCount = parseInt(localStorage.getItem('ganyoOrders')) || 142; 
+document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
 
-// WHATSAPP ORDER
 function sendOrder(){
-const phone=document.getElementById('orderPhone').value;
+    const phone = document.getElementById('orderPhone').value;
+    if(!activePkg || !phone){ alert("Select bundle and enter number"); return; }
+    
+    orderCount++;
+    localStorage.setItem('ganyoOrders', orderCount);
+    document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
 
-if(!activePkg || !phone){
-alert("Select bundle and enter number");
-return;
-}
-
-// Update count
-orderCount++;
-localStorage.setItem('ganyoOrders', orderCount);
-document.getElementById('totalOrders').innerText = orderCount;
-
-const msg=`NEW DATA ORDER
-Network: ${activeNet}
-Phone: ${phone}
-Bundle: ${activePkg} (${activePrice})`;
-
-window.open("https://wa.me"+encodeURIComponent(msg));
+    const msg=`🚀 *NEW DATA ORDER*%0A----------------------%0A👤 *Network:* ${activeNet}%0A📱 *Recipient:* ${phone}%0A📦 *Bundle:* ${activePkg} (${activePrice})%0A----------------------`;
+    window.open("https://wa.me/233505332010?text="+msg);
 }
 
 // TIMER
 const target=new Date("May 20, 2026 00:00:00").getTime();
-
 setInterval(()=>{
-let now=new Date().getTime();
-let diff=target-now;
-
-if(diff<0){
-document.getElementById("timer").innerText="LIVE";
-return;
-}
-
-let d=Math.floor(diff/86400000);
-let h=Math.floor((diff%86400000)/3600000);
-let m=Math.floor((diff%3600000)/60000);
-let s=Math.floor((diff%60000)/1000);
-
-document.getElementById("timer").innerText=
-`${d}:${h<10?'0'+h:h}:${m<10?'0'+m:m}:${s<10?'0'+s:s}`;
+let diff=target-new Date().getTime();
+if(diff<0){ document.getElementById("timer").innerText="LIVE"; return; }
+let d=Math.floor(diff/86400000), h=Math.floor((diff%86400000)/3600000), m=Math.floor((diff%3600000)/60000), s=Math.floor((diff%60000)/1000);
+document.getElementById("timer").innerText=`${d}:${h<10?'0'+h:h}:${m<10?'0'+m:m}:${s<10?'0'+s:s}`;
 },1000);
 
-// QUIZ (Expand this list to 100 as needed)
 const quiz=[
-{q:"What is known as 'Digital Gold'?",o:["Bitcoin","Ethereum","Solana"],c:0},
-{q:"What does NFT stand for?",o:["Non-Fungible Token","National Fund Trust"],c:0},
-{q:"DeFi stands for?",o:["Decentralized Finance","Digital Finance"],c:0},
-{q:"Who created Bitcoin?",o:["Satoshi Nakamoto","Elon Musk"],c:0}
+{q:"What is known as the 'Digital Gold'?", o:["Ethereum","Bitcoin","Solana"], c:1},
+{q:"What does NFT stand for?", o:["New Financial Tool","Non-Fungible Token","National Fund Trust"], c:1},
+{q:"Which of these is a stablecoin?", o:["USDT","Dogecoin","Litecoin"], c:0},
+{q:"DeFi stands for?", o:["Decentralized Finance","Digital Finance","Detailed File"], c:0},
+{q:"What is a private key used for?", o:["Sharing on social media","Accessing your wallet","Creating a password"], c:1}
 ];
 
 let score=0, curQ=0;
-
 function nextQ(){
-curQ=Math.floor(Math.random()*quiz.length);
+curQ = Math.floor(Math.random()*quiz.length);
 let q=quiz[curQ];
 document.getElementById("qText").innerText=q.q;
 document.getElementById("qOptions").innerHTML=q.o.map((opt,i)=>`
@@ -322,21 +188,15 @@ document.getElementById("qRes").innerText="";
 }
 
 function check(i){
-if(i===quiz[curQ].c){
-score++;
-document.getElementById("qRes").innerText="Correct!";
-document.getElementById("qRes").style.color="green";
-}else{
-document.getElementById("qRes").innerText="Wrong!";
-document.getElementById("qRes").style.color="red";
-}
+const isCorrect = i === quiz[curQ].c;
+if(isCorrect) score++;
+document.getElementById("qRes").innerText=isCorrect ? "✅ Correct!" : "❌ Wrong!";
+document.getElementById("qRes").style.color=isCorrect ? "green" : "red";
 document.getElementById("score").innerText=score;
 }
 
 renderPackages();
 nextQ();
-
 </script>
-
 </body>
 </html>
