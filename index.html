@@ -59,7 +59,7 @@ header { background:#fff; padding:1rem 5%; display:flex; justify-content:space-b
 <body>
 
 <header>
-<div class="logo">GanyoKripto</div>
+<div class="logo">GanyoDigital</div>
 <div class="motto">Knowledge is Money</div>
 </header>
 
@@ -83,7 +83,7 @@ header { background:#fff; padding:1rem 5%; display:flex; justify-content:space-b
 <div class="card">
 <i class="fa fa-chart-line" style="font-size:2rem; color:var(--primary)"></i>
 <h3>DeFi Portal</h3>
-<a href="https://tactics-strategy.com" target="_blank" class="serv-btn">Enter Portal</a>
+<a href="https://app.tactics-strategy.com/r/C7lrUMxqZF" target="_blank" class="serv-btn">Enter Portal</a>
 </div>
 
 <div class="card">
@@ -95,7 +95,7 @@ header { background:#fff; padding:1rem 5%; display:flex; justify-content:space-b
 <div class="card">
 <i class="fa fa-users" style="font-size:2rem; color:var(--primary)"></i>
 <h3>Community</h3>
-<a href="https://whatsapp.com" target="_blank" class="serv-btn">Join WhatsApp</a>
+<a href="https://chat.whatsapp.com/Dmko91cY4OA93VfBfweaVf" target="_blank" class="serv-btn">Join WhatsApp</a>
 </div>
 </div>
 
@@ -114,7 +114,7 @@ header { background:#fff; padding:1rem 5%; display:flex; justify-content:space-b
 </section>
 
 <div class="footer">
-GanyoKripto &copy; 2024 | Support: 0505332010
+GanyoKripto & copy; 2026 | Support: 0505332010
 </div>
 
 <script>
@@ -145,7 +145,7 @@ el.classList.add('active');
 }
 
 // ORDER COUNTER LOGIC - ONLY INCREASES ON CLICK
-let orderCount = parseInt(localStorage.getItem('ganyoOrders')) || 142; 
+let orderCount = parseInt(localStorage.getItem('ganyoOrders')) || 0; 
 document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
 
 function sendOrder(){
@@ -153,7 +153,7 @@ function sendOrder(){
     if(!activePkg || !phone){ alert("Select bundle and enter number"); return; }
     
     orderCount++;
-    localStorage.setItem('ganyoOrders', orderCount);
+    localStorage.setItem('GanyoData', orderCount);
     document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
 
     const msg=`🚀 *NEW DATA ORDER*%0A----------------------%0A👤 *Network:* ${activeNet}%0A📱 *Recipient:* ${phone}%0A📦 *Bundle:* ${activePkg} (${activePrice})%0A----------------------`;
@@ -161,7 +161,7 @@ function sendOrder(){
 }
 
 // TIMER
-const target=new Date("May 20, 2026 00:00:00").getTime();
+const target=new Date("May 30, 2026 00:00:00").getTime();
 setInterval(()=>{
 let diff=target-new Date().getTime();
 if(diff<0){ document.getElementById("timer").innerText="LIVE"; return; }
