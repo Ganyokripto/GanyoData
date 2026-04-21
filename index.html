@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GanyoKripto | Fast Data & Services</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://cloudflare.com">
 
 <style>
 :root { 
@@ -33,7 +33,8 @@ header { background:#fff; padding:1rem 5%; display:flex; justify-content:space-b
 .input-phone { padding:12px; width:100%; max-width:280px; border-radius:10px; border:1px solid #ccc; margin-bottom:10px; outline:none; text-align:center; }
 .order-btn { background:#25d366; color:white; padding:12px; border-radius:50px; border:none; cursor:pointer; width:100%; max-width:250px; font-weight:bold; font-size:1rem; }
 
-.order-count { font-size: 0.8rem; color: #666; margin-top: 10px; font-weight: bold; }
+/* FIXED COUNTER STYLE */
+.order-count { font-size: 0.85rem; color: #28a745; margin-top: 12px; font-weight: bold; background: #f0fdf4; padding: 5px 12px; border-radius: 15px; display: inline-block; border: 1px solid #dcfce7; }
 
 /* SERVICES BUTTONS */
 .services { padding:1rem 5%; display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1rem; }
@@ -77,7 +78,8 @@ header { background:#fff; padding:1rem 5%; display:flex; justify-content:space-b
 
 <input type="number" id="orderPhone" class="input-phone" placeholder="Recipient Number">
 <button class="order-btn" onclick="sendOrder()">Place Order Now</button>
-<div class="order-count"><i class="fa fa-shopping-cart"></i> <span id="totalOrders">1,248</span> Orders Made Today</div>
+<br>
+<div class="order-count"><i class="fa fa-shopping-basket"></i> <span id="totalOrders">0</span> Orders Made Today</div>
 </section>
 
 <!-- SERVICES -->
@@ -152,19 +154,25 @@ document.querySelectorAll('.pkg-btn').forEach(b=>b.classList.remove('active'));
 el.classList.add('active');
 }
 
-function sendOrder(){
-const phone=document.getElementById('orderPhone').value;
-if(!activePkg || !phone){ alert("Select bundle and enter number"); return; }
-const msg=`NEW DATA ORDER\nNetwork: ${activeNet}\nPhone: ${phone}\nBundle: ${activePkg} (${activePrice})`;
-window.open("https://wa.me/233505332010?text="+encodeURIComponent(msg));
-}
+// FIXED ORDER COUNTER LOGIC
+let orderCount = parseInt(localStorage.getItem('ganyoOrders')) || 142; // Starts at 142 as a baseline
+document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
 
-// ORDER COUNTER LOGIC
-let baseOrders = 1248;
-setInterval(() => {
-    baseOrders += Math.floor(Math.random() * 2);
-    document.getElementById('totalOrders').innerText = baseOrders.toLocaleString();
-}, 5000);
+function sendOrder(){
+    const phone = document.getElementById('orderPhone').value;
+    if(!activePkg || !phone){ 
+        alert("Select bundle and enter number"); 
+        return; 
+    }
+    
+    // INCREASE ONLY ON BUTTON TAP
+    orderCount++;
+    localStorage.setItem('ganyoOrders', orderCount);
+    document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
+
+    const msg = `NEW DATA ORDER\nNetwork: ${activeNet}\nPhone: ${phone}\nBundle: ${activePkg} (${activePrice})`;
+    window.open("https://wa.me"+encodeURIComponent(msg));
+}
 
 // TIMER
 const target=new Date("May 20, 2026 00:00:00").getTime();
@@ -179,7 +187,7 @@ let s=Math.floor((diff%60000)/1000);
 document.getElementById("timer").innerText=`${d}:${h<10?'0'+h:h}:${m<10?'0'+m:m}:${s<10?'0'+s:s}`;
 },1000);
 
-// EXTENDED QUIZ BANK (Add more questions to the array below to reach 100)
+// QUIZ BANK
 const quiz=[
 {q:"What is known as the 'Digital Gold'?", o:["Ethereum","Bitcoin","Solana"], c:1},
 {q:"What does NFT stand for?", o:["New Financial Tool","Non-Fungible Token","National Fund Trust"], c:1},
