@@ -182,7 +182,7 @@ el.classList.add('active');
 }
 
 // ORDER COUNTER LOGIC - ONLY INCREASES ON CLICK
-et orderCount = parseInt(localStorage.getItem('ganyoOrders')) || 0; 
+let orderCount = parseInt(localStorage.getItem('ganyoOrders')) || 0; 
 document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
 
 function sendOrder(){
