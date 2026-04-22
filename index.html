@@ -60,7 +60,7 @@ header { background:#fff; padding:1rem 5%; display:flex; justify-content:space-b
 
 <header>
 <div class="logo">GanyoDigital</div>
-<div class="motto">Powered By: GanyoKripto</div>
+<div class="motto">Powdered By: GanyoKripto</div>
 </header>
 
 <!-- PAYMENT INSTRUCTIONS SECTION -->
@@ -272,42 +272,5 @@ function updateDailyInsight() {
 updateDailyInsight();
 
 </script>
-    <script>
-    alert("Script is loading!"); // If you don't see this, the site hasn't updated
-    let orderCount = parseInt(localStorage.getItem('ganyo_final_v1')) || 0;
-    // ... rest of the code ...
-</script>
-    // 2. DISPLAY: Show that saved number on the screen
-    const counterDisplay = document.getElementById('totalOrders');
-    if (counterDisplay) {
-        counterDisplay.innerText = orderCount.toLocaleString();
-    }
-
-    // 3. UPDATE: This function only runs when you CLICK the button
-    function sendOrder() {
-        const phone = document.getElementById('orderPhone').value;
-        
-        // Validation check (adjust 'activePkg' to match your actual package variable)
-        if (typeof activePkg === 'undefined' || !activePkg || !phone) {
-            alert("Please select a bundle and enter your phone number.");
-            return;
-        }
-
-        // Increase the number
-        orderCount++;
-
-        // SAVE to memory so it sticks after refresh
-        localStorage.setItem('ganyo_final_v1', orderCount);
-
-        // Update the screen
-        if (counterDisplay) {
-            counterDisplay.innerText = orderCount.toLocaleString();
-        }
-
-        // --- Your WhatsApp redirect code goes here ---
-        console.log("Order submitted for: " +233505332010);
-    }
-</script>
-
 </body>
 </html>
