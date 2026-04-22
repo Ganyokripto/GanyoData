@@ -272,5 +272,42 @@ function updateDailyInsight() {
 updateDailyInsight();
 
 </script>
+    <script>
+    // 1. READ: Get the saved number immediately when page loads
+    // We use a unique key 'ganyo_official_count' to avoid old data
+    let orderCount = parseInt(localStorage.getItem('ganyo_official_count')) || 0;
+
+    // 2. DISPLAY: Show that saved number on the screen
+    const counterDisplay = document.getElementById('totalOrders');
+    if (counterDisplay) {
+        counterDisplay.innerText = orderCount.toLocaleString();
+    }
+
+    // 3. UPDATE: This function only runs when you CLICK the button
+    function sendOrder() {
+        const phone = document.getElementById('orderPhone').value;
+        
+        // Validation check (adjust 'activePkg' to match your actual package variable)
+        if (typeof activePkg === 'undefined' || !activePkg || !phone) {
+            alert("Please select a bundle and enter your phone number.");
+            return;
+        }
+
+        // Increase the number
+        orderCount++;
+
+        // SAVE to memory so it sticks after refresh
+        localStorage.setItem('ganyo_official_count', orderCount);
+
+        // Update the screen
+        if (counterDisplay) {
+            counterDisplay.innerText = orderCount.toLocaleString();
+        }
+
+        // --- Your WhatsApp redirect code goes here ---
+        console.log("Order submitted for: " + phone);
+    }
+</script>
+
 </body>
 </html>
