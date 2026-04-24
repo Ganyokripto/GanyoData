@@ -108,25 +108,33 @@ header { background:#fff; padding:1rem 5%; display:flex; justify-content:space-b
     <p style="margin-top: 10px; font-size: 0.85rem; color: #d9534f; font-weight: bold;">⚠️ Please use 1 as the Reference!</p>
 </section>
     
-<section class="order-section">
+<section class="order-section" style="background: #fff; padding: 2rem; border-radius: 20px; margin: 15px 5%; color: #333; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
     <h2 style="color: var(--primary);">🛒 Order Data</h2>
-    <div class="network-grid">
-        <button class="net-btn active" onclick="selectNet('MTN')">MTN</button>
-        <button class="net-btn" onclick="selectNet('Telecel')">Telecel</button>
-        <button class="net-btn" onclick="selectNet('AirtelTigo')">AirtelTigo</button>
+    
+    <div class="network-grid" style="display: flex; gap: 10px; justify-content: center; margin-bottom: 15px;">
+        <button class="net-btn active" onclick="selectNet('MTN')" style="padding: 10px 20px; border-radius: 8px; border: 2px solid #eee; cursor: pointer; font-weight: bold;">MTN</button>
+        <button class="net-btn" onclick="selectNet('Telecel')" style="padding: 10px 20px; border-radius: 8px; border: 2px solid #eee; cursor: pointer; font-weight: bold;">Telecel</button>
+        <button class="net-btn" onclick="selectNet('AirtelTigo')" style="padding: 10px 20px; border-radius: 8px; border: 2px solid #eee; cursor: pointer; font-weight: bold;">AirtelTigo</button>
     </div>
 
-    <!-- THIS BOX MUST HAVE id="dataPlan" -->
-    <select id="dataPlan" class="input-phone" style="margin: 15px 0; width: 100%; padding: 10px; border-radius: 8px;">
+    <!-- Bundle Dropdown -->
+    <select id="dataPlan" class="input-phone" style="margin: 15px 0; width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #ddd; font-size: 1rem;">
         <option value="">Select Bundle</option>
     </select>
 
-    <input type="number" id="orderPhone" class="input-phone" placeholder="Recipient Number" style="width: 100%; padding: 10px; border-radius: 8px; margin-bottom: 15px;">
+    <!-- Recipient Number -->
+    <input type="number" id="orderPhone" class="input-phone" placeholder="Recipient Number" style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #ddd; margin-bottom: 20px; font-size: 1rem; box-sizing: border-box;">
     
-    <button class="order-btn" onclick="sendOrder()" style="background: var(--primary); color: white; width: 100%; padding: 15px; border: none; border-radius: 12px; font-weight: bold; cursor: pointer;">
-        Place Order Now
+    <!-- PLACE ORDER BUTTON -->
+    <button class="order-btn" onclick="sendOrder()" style="background: var(--primary); color: white; width: 100%; padding: 15px; border: none; border-radius: 12px; font-weight: bold; font-size: 1.1rem; cursor: pointer;">
+        🚀 Place Order Now
     </button>
+
+    <div class="order-count" style="margin-top: 15px; font-size: 0.9rem; color: #666;">
+        <i class="fa-solid fa-circle-check"></i> <span id="totalOrders">0</span> Orders Processed
+    </div>
 </section>
+
 
 <div class="services">
 <div class="card">
