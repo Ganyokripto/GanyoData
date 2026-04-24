@@ -201,32 +201,39 @@ document.querySelectorAll('.pkg-btn').forEach(b=>b.classList.remove('active'));
 el.classList.add('active');
 }
 
-// ORDER COUNTER LOGIC - ONLY INCREASES ON CLICK
-let orderCount = parseInt(localStorage.getItem('ganyoOrders')) || 0; 
-document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
-
-function sendOrder(){
+function sendOrder() {
+    // 1. Get the recipient phone number from your input field
     const phone = document.getElementById('orderPhone').value;
-    if(!activePkg || !phone){ alert("Select bundle and enter number"); return; }
     
+    // 2. Validate that everything is selected (activePkg, activeNet, and activePrice must be defined)
+    if (typeof activePkg === 'undefined' || !activePkg || !phone) { 
+        alert("Please select a network, a bundle, and enter the recipient number."); 
+        return; 
+    }
+    
+    // 3. Update the Order Counter for your website stats
     orderCount++;
     localStorage.setItem('GanyoData', orderCount);
     document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
 
-// Format phone for SMS (0... to 233...)
-    let formatted = buyerPhone.startsWith('0') ? '233' + buyerPhone.substring(1) : buyerPhone;
+    // 4. Format the recipient number for the message (0... to 233...)
+    let formattedNum = phone.startsWith('0') ? '233' + phone.substring(1) : phone;
 
-    // 4. SEND SMS TO BUYER
-    const apiURL = "https://sms.gonlinesites.com/app/sms/api";
-    const apiKey = "R2FueW9EYXRhOkFtZW5yYWgxPw=="; 
-    const senderID = "GanyoData";
-    const smsText = `🚀 GanyoData: Your order for ${activePkg} (${activeNet}) has been received! Processing now. Thank you!`;
+    // 5. Create the WhatsApp message
+    const msg = `🚀 *NEW DATA ORDER*%0A` +
+                `----------------------%0A` +
+                `👤 *Network:* ${activeNet}%0A` +
+                `📊 *Plan:* ${activePkg}%0A` +
+                `💰 *Amount:* ${activePrice}%0A` +
+                `📱 *Recipient:* ${formattedNum}%0A` +
+                `----------------------%0A` +
+                `Sent via GanyoDigital`;
 
-    fetch(`${apiURL}?action=send-sms&api_key=${apiKey}&to=${formatted}&from=${senderID}&sms=${encodeURIComponent(smsText)}`)
-    .catch(err => console.log("SMS sent in background"));
+    // 6. Redirect the user to WhatsApp with your target number (0505332010)
+    // We use the full international format for the link: 233505332010
+    const whatsappURL = `https://wa.me{msg}`;
     
-    const msg=`🚀 *NEW DATA ORDER*%0A----------------------%0A👤 *Network:* ${activeNet}%0A📱 *Recipient:* ${phone}%0A📦 *Bundle:* ${activePkg} (${activePrice})%0A----------------------`;
-    window.open("https://wa.me/233505332010?text="+msg);
+    window.open(whatsappURL, '_blank');
 }
 
 // TIMER
